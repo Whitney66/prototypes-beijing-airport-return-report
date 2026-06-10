@@ -1,0 +1,35 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="58" y1="6" x2="92" y2="34" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FDBA2D"/>
+      <stop offset="1" stop-color="#E57A1D"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="82" y1="17" x2="115" y2="47" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E57A1D"/>
+      <stop offset="1" stop-color="#D8342A"/>
+    </linearGradient>
+    <linearGradient id="g3" x1="95" y1="48" x2="120" y2="82" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D8342A"/>
+      <stop offset="1" stop-color="#B9182D"/>
+    </linearGradient>
+    <linearGradient id="g4" x1="77" y1="87" x2="53" y2="116" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#82B8FF"/>
+      <stop offset="1" stop-color="#2867C8"/>
+    </linearGradient>
+    <linearGradient id="g5" x1="48" y1="81" x2="14" y2="88" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#63A83E"/>
+      <stop offset="1" stop-color="#49B53D"/>
+    </linearGradient>
+    <linearGradient id="g6" x1="35" y1="36" x2="10" y2="63" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#80C53A"/>
+      <stop offset="1" stop-color="#4EA739"/>
+    </linearGradient>
+  </defs>
+  <path d="M63 8C69 8 75 11 79 16L90 28C93 31 93 35 89 39L73 55C69 59 64 59 60 55L47 42C43 38 43 33 47 29L56 16C58 11 60 8 63 8Z" fill="url(#g1)"/>
+  <path d="M80 18C84 14 90 14 94 18L109 33C113 37 113 43 109 47L96 60C92 64 87 64 83 60L70 47C66 43 66 38 70 34L80 18Z" fill="url(#g2)"/>
+  <path d="M98 47C102 43 108 43 112 47L120 55C124 59 124 65 120 69L104 85C100 89 95 89 91 85L79 73C75 69 75 64 79 60L98 47Z" fill="url(#g3)"/>
+  <path d="M77 73C81 69 86 69 90 73L103 86C107 90 107 96 103 100L89 113C85 117 79 117 75 113L58 98C54 94 54 89 58 85L77 73Z" fill="url(#g4)"/>
+  <path d="M49 74C53 70 58 70 62 74L75 87C79 91 79 96 75 100L63 112C59 116 53 116 49 112L31 101C27 97 27 91 31 87L49 74Z" fill="url(#g4)" opacity="0.95"/>
+  <path d="M31 46C35 42 40 42 44 46L57 59C61 63 61 68 57 72L44 85C40 89 35 89 31 85L14 75C10 71 10 65 14 61L31 46Z" fill="url(#g5)"/>
+  <path d="M20 30C24 26 29 26 33 30L45 42C49 46 49 51 45 55L32 68C28 72 23 72 19 68L10 59C6 55 6 49 10 45L20 30Z" fill="url(#g6)"/>
+</svg>

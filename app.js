@@ -454,7 +454,6 @@ function getPagedRows() {
 
 function renderTable() {
   const rows = getPagedRows();
-  elements.total.textContent = state.filteredRows.length;
   elements.footerTotal.textContent = state.filteredRows.length;
 
   if (!rows.length) {

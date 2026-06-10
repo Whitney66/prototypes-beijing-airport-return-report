@@ -190,9 +190,28 @@ button {
   box-shadow: var(--shadow);
 }
 
+.title-card,
 .filter-card,
 .table-card {
   padding: 18px;
+}
+
+.title-card {
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.report-title-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 14px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #3890ff, #2f67f6);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgba(47, 103, 246, 0.2);
 }
 
 .card-header {

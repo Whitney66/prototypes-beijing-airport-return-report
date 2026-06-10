@@ -144,12 +144,7 @@ const state = {
 
 const elements = {
   tbody: document.getElementById('report-tbody'),
-  total: document.getElementById('metric-total'),
-  storeMetric: document.getElementById('metric-stores'),
-  shopMetric: document.getElementById('metric-shops'),
-  dateMetric: document.getElementById('metric-date'),
   footerTotal: document.getElementById('footer-total'),
-  activeFilters: document.getElementById('active-filters'),
   loading: document.getElementById('table-loading'),
   pageList: document.getElementById('page-list'),
   pageSize: document.getElementById('page-size-select'),
@@ -420,37 +415,9 @@ function refreshFilterUIs() {
     component.renderOptions();
     component.updateSummary();
   });
-  renderActiveFilterChips();
-  updateSummaryCards();
+
 }
 
-function renderActiveFilterChips() {
-  const chips = [];
-  const filterDefs = [
-    ['门店', 'store'],
-    ['店面', 'shop'],
-    ['大类', 'category'],
-    ['柜组', 'counter'],
-    ['品牌', 'brand'],
-    ['商品编码', 'productCode'],
-    ['商品条码', 'barcode'],
-  ];
-
-  filterDefs.forEach(([label, key]) => {
-    const total = state.filterComponents[key].options.length;
-    const selected = state.filters[key].length;
-    chips.push(`<span class="filter-chip">${label}：${selected === total ? '全部' : `已选 ${selected} 项`}</span>`);
-  });
-
-  chips.unshift(`<span class="filter-chip">日期：${state.filters.date}</span>`);
-  elements.activeFilters.innerHTML = chips.join('');
-}
-
-function updateSummaryCards() {
-  elements.storeMetric.textContent = state.filters.store.length;
-  elements.shopMetric.textContent = state.filters.shop.length;
-  elements.dateMetric.textContent = state.filters.date;
-}
 
 function filterRows() {
   const filters = state.filters;
@@ -618,8 +585,6 @@ function bindEvents() {
   elements.dateInput.value = defaultDate;
   elements.dateInput.addEventListener('change', () => {
     state.filters.date = elements.dateInput.value;
-    updateSummaryCards();
-    renderActiveFilterChips();
   });
 
   elements.pageSize.addEventListener('change', () => {

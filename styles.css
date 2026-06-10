@@ -26,7 +26,7 @@ body {
 }
 
 body {
-  min-width: 1480px;
+  min-width: 1280px;
 }
 
 button,
@@ -60,13 +60,7 @@ button {
   display: flex;
   align-items: center;
   gap: 12px;
-  min-width: 190px;
-}
-
-.brand-logo {
-  width: 32px;
-  height: 32px;
-  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.15));
+  min-width: 160px;
 }
 
 .brand-title {
@@ -193,10 +187,6 @@ button {
   box-shadow: 0 8px 18px rgba(47, 103, 246, 0.28);
 }
 
-.crumb-divider {
-  color: #98a6c5;
-}
-
 .banner-main {
   display: flex;
   justify-content: space-between;
@@ -296,14 +286,18 @@ button {
 .filter-grid {
   margin-top: 18px;
   display: grid;
-  grid-template-columns: repeat(4, minmax(280px, 1fr));
-  gap: 14px 16px;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: 12px 14px;
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
+}
+
+.field-date {
+  max-width: 220px;
 }
 
 .field-label {
@@ -317,7 +311,7 @@ button {
 .goto-wrapper input,
 .page-size-wrapper select {
   width: 100%;
-  height: 42px;
+  height: 38px;
   border-radius: 10px;
   border: 1px solid var(--border);
   background: #fbfdff;
@@ -327,7 +321,7 @@ button {
 }
 
 .date-input {
-  padding: 0 14px;
+  padding: 0 12px;
 }
 
 .date-input:focus,
@@ -436,62 +430,6 @@ button {
   font-size: 13px;
 }
 
-.active-filter-chips {
-  margin-top: 16px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.filter-chip {
-  padding: 7px 12px;
-  border-radius: 999px;
-  background: #f0f5ff;
-  border: 1px solid #d7e5ff;
-  color: #2d54a8;
-  font-size: 12px;
-}
-
-.summary-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.summary-card {
-  padding: 18px;
-}
-
-.highlight-card {
-  background: linear-gradient(135deg, #2f67f6 0%, #5ea4ff 100%);
-  color: #fff;
-}
-
-.highlight-card .summary-label,
-.highlight-card .summary-hint {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.summary-label {
-  display: block;
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.summary-value {
-  display: block;
-  margin-top: 10px;
-  font-size: 30px;
-  line-height: 1;
-}
-
-.summary-hint {
-  display: block;
-  margin-top: 8px;
-  font-size: 12px;
-  color: #8795b2;
-}
-
 .report-header {
   margin-bottom: 16px;
 }
@@ -550,29 +488,6 @@ button {
   border-bottom: 1px solid #e9eef8;
   white-space: nowrap;
   font-size: 13px;
-}
-
-.report-table thead th {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  background: #f4f8ff;
-  color: #264072;
-  font-weight: 700;
-}
-
-.report-table thead .group-row th {
-  top: 0;
-  z-index: 4;
-  background: linear-gradient(180deg, #eaf2ff, #dceaff);
-  color: #2551b0;
-  text-align: left;
-  border-bottom: 1px solid #cdddfa;
-}
-
-.report-table thead tr:nth-child(2) th {
-  top: 42px;
-  z-index: 3;
 }
 
 .report-table tbody tr:nth-child(even) {

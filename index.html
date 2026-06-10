@@ -10,11 +10,9 @@
     <div class="app-shell">
       <header class="topbar">
         <div class="brand-block">
-          <img src="logo.svg" alt="大数据平台" class="brand-logo" />
           <div class="brand-title">大数据平台</div>
         </div>
         <nav class="primary-nav">
-          <a href="#" class="nav-item">经营看板</a>
           <a href="#" class="nav-item active">销售分析</a>
           <a href="#" class="nav-item">进销存分析</a>
           <a href="#" class="nav-item">库存分析</a>
@@ -38,9 +36,7 @@
       <main class="page-body">
         <section class="page-banner">
           <div class="crumb-row">
-            <span class="crumb-pill">经营看板</span>
-            <span class="crumb-divider">/</span>
-            <span class="crumb-pill active">销售汇总表</span>
+            <span class="crumb-pill active">退运清关商品数据分析表</span>
           </div>
           <div class="banner-main">
             <div>
@@ -61,13 +57,9 @@
               <h2>筛选条件</h2>
               <p>默认全部选中，可按单日、门店、店面及商品维度组合筛选。</p>
             </div>
-            <div class="card-actions">
-              <button id="reset-button" class="btn btn-secondary" type="button">重置</button>
-              <button id="query-button" class="btn btn-primary" type="button">查询</button>
-            </div>
           </div>
           <div class="filter-grid">
-            <label class="field">
+            <label class="field field-date">
               <span class="field-label">日期</span>
               <input id="date-filter" class="date-input" type="date" />
             </label>
@@ -100,30 +92,10 @@
               <div id="barcode-filter"></div>
             </div>
           </div>
-          <div id="active-filters" class="active-filter-chips"></div>
-        </section>
-
-        <section class="summary-grid">
-          <article class="summary-card card">
-            <span class="summary-label">当前记录数</span>
-            <strong id="metric-total" class="summary-value">0</strong>
-            <span class="summary-hint">筛选结果总条数</span>
-          </article>
-          <article class="summary-card card">
-            <span class="summary-label">覆盖门店</span>
-            <strong id="metric-stores" class="summary-value">0</strong>
-            <span class="summary-hint">已选门店数量</span>
-          </article>
-          <article class="summary-card card">
-            <span class="summary-label">覆盖店面</span>
-            <strong id="metric-shops" class="summary-value">0</strong>
-            <span class="summary-hint">已选店面数量</span>
-          </article>
-          <article class="summary-card card highlight-card">
-            <span class="summary-label">查询日期</span>
-            <strong id="metric-date" class="summary-value">-</strong>
-            <span class="summary-hint">支持单日精确查询</span>
-          </article>
+          <div class="card-actions filter-actions">
+            <button id="reset-button" class="btn btn-secondary" type="button">重置</button>
+            <button id="query-button" class="btn btn-primary" type="button">查询</button>
+          </div>
         </section>
 
         <section class="table-card card">
@@ -143,46 +115,7 @@
           </div>
 
           <div class="table-scroll">
-            <table class="report-table">
-              <thead>
-                <tr class="group-row">
-                  <th colspan="12">商品基础信息</th>
-                  <th colspan="5">价格库存信息</th>
-                  <th colspan="5">EOP 信息</th>
-                  <th colspan="3">NCC 信息</th>
-                  <th colspan="3">CIBO 信息</th>
-                </tr>
-                <tr>
-                  <th>门店</th>
-                  <th>店面</th>
-                  <th>柜组</th>
-                  <th>商品编码</th>
-                  <th>商品名称</th>
-                  <th>供应商</th>
-                  <th>规格</th>
-                  <th>品牌</th>
-                  <th>大类</th>
-                  <th>条码</th>
-                  <th>货号</th>
-                  <th>类别</th>
-                  <th>平均不含税进价</th>
-                  <th>售价</th>
-                  <th>库存数量</th>
-                  <th>平均不含税进价金额</th>
-                  <th>售价金额</th>
-                  <th>EOP销售订单号</th>
-                  <th>EOP发票号</th>
-                  <th>EOP实收数量</th>
-                  <th>EOP到店价</th>
-                  <th>币种</th>
-                  <th>NCC发票号</th>
-                  <th>NCC发票价</th>
-                  <th>NCC发票币种</th>
-                  <th>CIBO发票号</th>
-                  <th>CIBO发票价</th>
-                  <th>CIBO发票币种</th>
-                </tr>
-              </thead>
+            <table class="report-table compact-table">
               <tbody id="report-tbody"></tbody>
             </table>
           </div>

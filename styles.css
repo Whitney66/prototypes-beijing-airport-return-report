@@ -264,8 +264,12 @@ button {
   margin-top: 18px;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 12px 14px;
+  gap: 10px 8px;
   align-items: end;
+}
+
+.filter-grid-compact {
+  margin-top: 0;
 }
 
 .field {
@@ -281,11 +285,11 @@ button {
 }
 
 .field-date {
-  max-width: 180px;
+  max-width: 200px;
 }
 
 .field-compact {
-  max-width: 200px;
+  max-width: 230px;
 }
 
 .field-label {
@@ -605,8 +609,3 @@ button {
   padding: 0 10px;
 }
 
-@media (max-width: 1680px) {
-  .filter-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}

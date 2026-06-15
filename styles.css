@@ -437,6 +437,11 @@ button {
   margin-bottom: 16px;
 }
 
+.table-toolbar-top {
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
 .table-loading {
   display: flex;
   align-items: center;

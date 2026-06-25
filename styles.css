@@ -548,6 +548,7 @@ button {
   line-height: 1.5;
   text-align: left;
   box-shadow: 0 12px 24px rgba(24, 36, 61, 0.22);
+  z-index: 7;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.18s ease;
@@ -576,6 +577,10 @@ button {
 .report-table thead tr:nth-child(2) th {
   top: 42px;
   z-index: 3;
+}
+
+.report-table thead tr:nth-child(2) th:has(.th-tip.is-open) {
+  z-index: 6;
 }
 
 .report-table tbody tr:nth-child(even) {

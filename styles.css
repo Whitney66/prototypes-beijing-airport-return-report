@@ -512,7 +512,7 @@ button {
   z-index: 4;
   background: linear-gradient(180deg, #eaf2ff, #dceaff);
   color: #2551b0;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #cdddfa;
 }
 

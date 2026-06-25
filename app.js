@@ -121,12 +121,8 @@ const allShops = Object.entries(shopOptionsByStore).flatMap(([store, shops]) =>
   shops.map((shop) => ({ value: shop, label: `[${shop}]`, store }))
 );
 
-const sampleDates = ['2026-06-05', '2026-06-06', '2026-06-07', '2026-06-08', '2026-06-09'];
-const defaultDate = '2026-06-09';
-
 const state = {
   filters: {
-    date: defaultDate,
     store: storeOptions.map((item) => item.value),
     shop: allShops.map((item) => item.value),
     category: categoryOptions.map((item) => item.value),
@@ -149,7 +145,6 @@ const elements = {
   pageList: document.getElementById('page-list'),
   pageSize: document.getElementById('page-size-select'),
   gotoPage: document.getElementById('goto-page'),
-  dateInput: document.getElementById('date-filter'),
   prevPage: document.getElementById('prev-page'),
   nextPage: document.getElementById('next-page'),
   gotoButton: document.getElementById('goto-button'),
@@ -179,7 +174,6 @@ function buildMockRows() {
     const store = stores[index % stores.length];
     const shops = shopOptionsByStore[store.value];
     const shop = shops[index % shops.length];
-    const date = sampleDates[index % sampleDates.length];
     const counter = brand.counter;
     const avgPrice = 65 + (index % 9) * 24 + (index % 3) * 5.5;
     const salePrice = avgPrice * (1.32 + (index % 4) * 0.08);
@@ -192,9 +186,12 @@ function buildMockRows() {
     const nccCurrency = currency === 'CNY' ? 'USD' : currency;
     const ciboCurrency = currency === 'EUR' ? 'USD' : currency;
 
+    const region = ['法国', '美国', '日本', '中国'][index % 4];
+    const ingredient = ['香精', '玻尿酸', '烟叶', '植物萃取'][index % 4];
+    const serial = `202606${pad((index % 28) + 1, 2)}`;
+
     rows.push({
       id: `ROW-${pad(index + 1, 3)}`,
-      date,
       store: store.label,
       storeValue: store.value,
       shop: `[${shop}]`,
@@ -208,21 +205,21 @@ function buildMockRows() {
       category: brand.category,
       barcode: brand.barcode,
       itemNo: `${brand.itemNo}-${pad(index + 1, 3)}`,
+      region,
+      ingredient,
       kind: brand.kind,
       avgPrice,
       salePrice,
       stockQty,
       avgAmount,
       saleAmount,
-      eopOrderNo: `EOP${date.replaceAll('-', '')}-${pad(index + 1, 4)}`,
-      eopInvoiceNo: `EINV${date.replaceAll('-', '').slice(2)}-${pad((index % 28) + 1, 3)}`,
+      eopOrderNo: `EOP${serial}-${pad(index + 1, 4)}`,
+      eopInvoiceNo: `EINV${serial.slice(2)}-${pad((index % 28) + 1, 3)}`,
       eopReceiveQty: receiveQty,
-      eopStorePrice: avgPrice + 3 + (index % 4) * 2,
-      currency,
-      nccInvoiceNo: `NCC-INV-${date.replaceAll('-', '')}-${pad((index % 30) + 1, 3)}`,
+      nccInvoiceNo: `NCC-INV-${serial}-${pad((index % 30) + 1, 3)}`,
       nccInvoicePrice: avgPrice + 6 + (index % 6) * 2.2,
       nccCurrency,
-      ciboInvoiceNo: `CIBO-INV-${date.replaceAll('-', '')}-${pad((index % 35) + 1, 3)}`,
+      ciboInvoiceNo: `CIBO-INV-${serial}-${pad((index % 35) + 1, 3)}`,
       ciboInvoicePrice: avgPrice + 8 + (index % 5) * 2.8,
       ciboCurrency,
     });
@@ -422,7 +419,6 @@ function refreshFilterUIs() {
 function filterRows() {
   const filters = state.filters;
   return state.rows.filter((row) =>
-    row.date === filters.date &&
     filters.store.includes(row.storeValue) &&
     filters.shop.includes(row.shopValue) &&
     filters.category.includes(row.category) &&
@@ -472,6 +468,8 @@ function renderTable() {
         <td>${row.category}</td>
         <td>${row.barcode}</td>
         <td>${row.itemNo}</td>
+        <td>${row.region}</td>
+        <td>${row.ingredient}</td>
         <td>${row.kind}</td>
         <td class="price">${formatMoney(row.avgPrice)}</td>
         <td class="price">${formatMoney(row.salePrice)}</td>
@@ -481,8 +479,6 @@ function renderTable() {
         <td>${row.eopOrderNo}</td>
         <td>${row.eopInvoiceNo}</td>
         <td class="qty">${row.eopReceiveQty}</td>
-        <td class="price">${formatMoney(row.eopStorePrice)}</td>
-        <td>${row.currency}</td>
         <td>${row.nccInvoiceNo}</td>
         <td class="price">${formatMoney(row.nccInvoicePrice)}</td>
         <td>${row.nccCurrency}</td>
@@ -532,7 +528,6 @@ function renderPagination() {
 }
 
 function resetFilters() {
-  state.filters.date = defaultDate;
   state.filters.store = storeOptions.map((item) => item.value);
   state.filters.shop = allShops.map((item) => item.value);
   state.filters.category = categoryOptions.map((item) => item.value);
@@ -541,7 +536,6 @@ function resetFilters() {
   state.filters.productCode = productCodeOptions.map((item) => item.value);
   state.filters.barcode = barcodeOptions.map((item) => item.value);
 
-  elements.dateInput.value = defaultDate;
   setFilterOptions('shop', allShops);
   refreshFilterUIs();
   applyFilters();
@@ -549,16 +543,16 @@ function resetFilters() {
 
 function exportCurrentRows() {
   const headers = [
-    '门店', '店面', '柜组', '商品编码', '商品名称', '供应商', '规格', '品牌', '大类', '条码', '货号', '类别',
-    '平均不含税进价', '售价', '库存数量', '平均不含税进价金额', '售价金额', 'EOP销售订单号', 'EOP发票号', 'EOP实收数量', 'EOP到店价', '币种',
+    '门店', '店面', '柜组', '商品编码', '商品名称', '供应商', '规格', '品牌', '大类', '商品条码', '货号', '产地', '主要成分', '类别',
+    '平均不含税进价', '售价', '库存数量', '平均不含税进价金额', '售价金额', 'EOP销售订单号', 'EOP发票号', 'EOP实收数量',
     'NCC发票号', 'NCC发票价', 'NCC发票币种', 'CIBO发票号', 'CIBO发票价', 'CIBO发票币种',
   ];
 
   const lines = [headers.join(',')];
   state.filteredRows.forEach((row) => {
     const values = [
-      row.store, row.shop, row.counter, row.productCode, row.productName, row.supplier, row.spec, row.brand, row.category, row.barcode, row.itemNo, row.kind,
-      row.avgPrice, row.salePrice, row.stockQty, row.avgAmount, row.saleAmount, row.eopOrderNo, row.eopInvoiceNo, row.eopReceiveQty, row.eopStorePrice, row.currency,
+      row.store, row.shop, row.counter, row.productCode, row.productName, row.supplier, row.spec, row.brand, row.category, row.barcode, row.itemNo, row.region, row.ingredient, row.kind,
+      row.avgPrice, row.salePrice, row.stockQty, row.avgAmount, row.saleAmount, row.eopOrderNo, row.eopInvoiceNo, row.eopReceiveQty,
       row.nccInvoiceNo, row.nccInvoicePrice, row.nccCurrency, row.ciboInvoiceNo, row.ciboInvoicePrice, row.ciboCurrency,
     ].map((value) => `"${String(value).replaceAll('"', '""')}"`);
     lines.push(values.join(','));
@@ -579,11 +573,6 @@ function bindEvents() {
   document.addEventListener('click', () => closeAllSelects());
   Object.values(state.filterComponents).forEach((component) => {
     component.panel.addEventListener('click', (event) => event.stopPropagation());
-  });
-
-  elements.dateInput.value = defaultDate;
-  elements.dateInput.addEventListener('change', () => {
-    state.filters.date = elements.dateInput.value;
   });
 
   elements.pageSize.addEventListener('change', () => {

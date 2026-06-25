@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>退运清关商品数据分析表</title>
-    <link rel="stylesheet" href="styles.css?v=20260610b" />
+    <link rel="stylesheet" href="styles.css?v=20260625a" />
   </head>
   <body>
     <div class="app-shell">
@@ -40,10 +40,6 @@
 
         <section class="filter-card card">
           <div class="filter-grid filter-grid-compact">
-            <label class="field field-date">
-              <span class="field-label">日期</span>
-              <input id="date-filter" class="date-input" type="date" />
-            </label>
             <div class="field field-compact">
               <span class="field-label">门店</span>
               <div id="store-filter"></div>
@@ -93,11 +89,10 @@
             <table class="report-table">
               <thead>
                 <tr class="group-row">
-                  <th colspan="12">商品基础信息</th>
-                  <th colspan="5">价格库存信息</th>
-                  <th colspan="5">EOP 信息</th>
-                  <th colspan="3">NCC 信息</th>
-                  <th colspan="3">CIBO 信息</th>
+                  <th colspan="17">EOP商品信息</th>
+                  <th colspan="5">EOP单据信息</th>
+                  <th colspan="3">NCC信息</th>
+                  <th colspan="3">CIBO信息</th>
                 </tr>
                 <tr>
                   <th>门店</th>
@@ -109,8 +104,10 @@
                   <th>规格</th>
                   <th>品牌</th>
                   <th>大类</th>
-                  <th>条码</th>
+                  <th>商品条码</th>
                   <th>货号</th>
+                  <th>产地</th>
+                  <th>主要成分</th>
                   <th>类别</th>
                   <th>平均不含税进价</th>
                   <th>售价</th>
@@ -120,8 +117,6 @@
                   <th>EOP销售订单号</th>
                   <th>EOP发票号</th>
                   <th>EOP实收数量</th>
-                  <th>EOP到店价</th>
-                  <th>币种</th>
                   <th>NCC发票号</th>
                   <th>NCC发票价</th>
                   <th>NCC发票币种</th>
@@ -161,6 +156,6 @@
       </main>
     </div>
 
-    <script src="app.js?v=20260610b"></script>
+    <script src="app.js?v=20260625a"></script>
   </body>
 </html>

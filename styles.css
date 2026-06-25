@@ -507,6 +507,54 @@ button {
   font-weight: 700;
 }
 
+.th-tip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: help;
+}
+
+.th-tip::after {
+  content: "?";
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  font-size: 10px;
+  line-height: 1;
+  color: #fff;
+  background: #7f97cb;
+}
+
+.th-tip::before {
+  content: attr(data-tip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%);
+  min-width: 220px;
+  max-width: 280px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(24, 36, 61, 0.94);
+  color: #fff;
+  white-space: normal;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: left;
+  box-shadow: 0 12px 24px rgba(24, 36, 61, 0.22);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+}
+
+.th-tip:hover::before,
+.th-tip:focus-visible::before {
+  opacity: 1;
+}
+
 .report-table thead .group-row th {
   top: 0;
   z-index: 4;

@@ -153,6 +153,14 @@ const elements = {
   exportButton: document.getElementById('export-button'),
 };
 
+function closeHeaderTips(exceptTip) {
+  document.querySelectorAll('.th-tip.is-open').forEach((tip) => {
+    if (tip !== exceptTip) {
+      tip.classList.remove('is-open');
+    }
+  });
+}
+
 function formatMoney(value) {
   return Number(value).toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
@@ -570,9 +578,20 @@ function exportCurrentRows() {
 }
 
 function bindEvents() {
-  document.addEventListener('click', () => closeAllSelects());
+  document.addEventListener('click', () => {
+    closeAllSelects();
+    closeHeaderTips();
+  });
   Object.values(state.filterComponents).forEach((component) => {
     component.panel.addEventListener('click', (event) => event.stopPropagation());
+  });
+  document.querySelectorAll('.th-tip').forEach((tip) => {
+    tip.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const willOpen = !tip.classList.contains('is-open');
+      closeHeaderTips(tip);
+      tip.classList.toggle('is-open', willOpen);
+    });
   });
 
   elements.pageSize.addEventListener('change', () => {

@@ -512,7 +512,10 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  cursor: help;
+  padding: 0;
+  color: inherit;
+  font-weight: inherit;
+  cursor: pointer;
 }
 
 .th-tip::after {
@@ -550,9 +553,15 @@ button {
   transition: opacity 0.18s ease;
 }
 
+.th-tip.is-open::before,
 .th-tip:hover::before,
 .th-tip:focus-visible::before {
   opacity: 1;
+}
+
+.th-tip:focus-visible {
+  outline: 2px solid #86adff;
+  outline-offset: 2px;
 }
 
 .report-table thead .group-row th {

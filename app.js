@@ -4,8 +4,26 @@ const storeOptions = [
 ];
 
 const shopOptionsByStore = {
-  '7222': ['722201', '722202', '722203', '722204', '722205', '722206'],
-  '7223': ['722301', '722302', '722303', '722304', '722305', '722306', '722307', '722308', '722309', '722310'],
+  '7222': [
+    { value: '722201', label: '[722201]' },
+    { value: '722202', label: '[722202]监管出境免值品仓' },
+    { value: '722203', label: '[722203]监管出境库待处....' },
+    { value: '722204', label: '[722204]海关监管入境正...' },
+    { value: '722205', label: '[722205]监管入境免值品仓' },
+    { value: '722206', label: '[722206]监管入境库待处理' },
+  ],
+  '7223': [
+    { value: '722301', label: '[722301]' },
+    { value: '722302', label: '[722302]' },
+    { value: '722303', label: '[722303]' },
+    { value: '722304', label: '[722304]' },
+    { value: '722305', label: '[722305]' },
+    { value: '722306', label: '[722306]' },
+    { value: '722307', label: '[722307]' },
+    { value: '722308', label: '[722308]' },
+    { value: '722309', label: '[722309]' },
+    { value: '722310', label: '[722310]' },
+  ],
 };
 
 const categoryOptions = [
@@ -26,6 +44,17 @@ const counterOptions = [
   '[72222301]T3E15',
 ].map((label) => ({ value: label, label }));
 
+const kindOptions = [
+  '[060404]女士小皮具',
+  '[060403]男士小皮具',
+  '[060402]女士大皮具',
+  '[060401]男士大皮具',
+  '[060303]男女通用首饰',
+  '[060302]女用首饰',
+  '[060207]皮带',
+  '[060202]围巾',
+];
+
 const brandCatalog = [
   {
     code: '060139',
@@ -38,7 +67,7 @@ const brandCatalog = [
     supplier: '中免国际香化供应链',
     spec: '50ml/瓶',
     itemNo: 'BLG-50-001',
-    kind: '香化',
+    kind: '[060404]女士小皮具',
     productName: 'Bulgari 宝格丽 晶灿女士香水',
   },
   {
@@ -52,7 +81,7 @@ const brandCatalog = [
     supplier: '中免国际香化供应链',
     spec: '60ml/瓶',
     itemNo: 'LAM-60-021',
-    kind: '香化',
+    kind: '[060404]女士小皮具',
     productName: 'La Mer 海蓝之谜 精粹乳',
   },
   {
@@ -66,7 +95,7 @@ const brandCatalog = [
     supplier: '兰蔻国际贸易',
     spec: '100ml/瓶',
     itemNo: 'LAN-100-018',
-    kind: '香化',
+    kind: '[060404]女士小皮具',
     productName: 'Lancome 兰蔻 菁纯精华水',
   },
   {
@@ -80,7 +109,7 @@ const brandCatalog = [
     supplier: '雅诗兰黛集团',
     spec: '75ml/瓶',
     itemNo: 'ELD-75-099',
-    kind: '香化',
+    kind: '[060404]女士小皮具',
     productName: 'Estee Lauder 雅诗兰黛 小棕瓶精华',
   },
   {
@@ -118,7 +147,7 @@ const productCodeOptions = brandCatalog.map((item) => ({ value: item.productCode
 const barcodeOptions = brandCatalog.map((item) => ({ value: item.barcode, label: item.barcode }));
 
 const allShops = Object.entries(shopOptionsByStore).flatMap(([store, shops]) =>
-  shops.map((shop) => ({ value: shop, label: `[${shop}]`, store }))
+  shops.map((shop) => ({ ...shop, store }))
 );
 
 const state = {
@@ -170,7 +199,7 @@ function pad(value, length = 4) {
 }
 
 function getValidShopValues(selectedStores) {
-  return selectedStores.flatMap((storeValue) => shopOptionsByStore[storeValue] || []);
+  return selectedStores.flatMap((storeValue) => (shopOptionsByStore[storeValue] || []).map((shop) => shop.value));
 }
 
 function buildMockRows() {
@@ -202,8 +231,8 @@ function buildMockRows() {
       id: `ROW-${pad(index + 1, 3)}`,
       store: store.label,
       storeValue: store.value,
-      shop: `[${shop}]`,
-      shopValue: shop,
+      shop: shop.label,
+      shopValue: shop.value,
       counter,
       productCode: brand.productCode,
       productName: brand.productName,
@@ -215,7 +244,7 @@ function buildMockRows() {
       itemNo: `${brand.itemNo}-${pad(index + 1, 3)}`,
       region,
       ingredient,
-      kind: brand.kind,
+      kind: kindOptions[index % kindOptions.length],
       avgPrice,
       salePrice,
       stockQty,
